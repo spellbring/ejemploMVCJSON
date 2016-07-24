@@ -18,31 +18,15 @@ namespace NorthWind.Models
         private SqlCommand D_cmd;
         private String status;
         private String stringConexion;
-        //private static volatile Conexion instance;
-        //private static object syncRoot = new Object();
 
 
 
         public Conexion()
         {
             try
-            {
-                // this.D_cn = new SqlConnection("Data Source=localhost; Initial Catalog=Financiero ; User ID=sa; Password=123");
-
-
-                // --------------------------------------------------------------------------------
-                // JOVM - 29/09/2015
-                // Se modifica modo de conexión y se obtiene cadena desde Web.Config la variable
-                // ConnectionString llamada "FinancieroConnectionString"
-                // --------------------------------------------------------------------------------
-                //System.Configuration.Configuration rootWebConfig = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/Senainfo2015");
+            {                
+                D_cn = new SqlConnection("Data Source=LAPTOP-1S4842QV\\SQLEXPRESS; Initial Catalog=NORTHWIND ; User ID=sa; Password=123dnd123");
                 
-                //if (0 < rootWebConfig.ConnectionStrings.ConnectionStrings.Count)
-                //{
-                //stringConexion = ConfigurationManager.ConnectionStrings["FinancieroConnectionString"].ToString();
-                D_cn = new SqlConnection("Data Source=\\SQLEXPRESS; Initial Catalog=NORTHWND ; User ID=sa; Password=123");
-                // }
-                // --------------------------------------------------------------------------------
                 if (this.D_cn.State != ConnectionState.Open)
                     this.D_cn.Open();
 
@@ -53,27 +37,7 @@ namespace NorthWind.Models
                 this.status = "Error: " + ex.ToString();
             }
         }
-        //public static Conexion Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //        {
-        //            lock (syncRoot)
-        //            {
-        //                if (instance == null)
-        //                {
-        //                    instance = new Conexion();
-
-        //                }
-
-        //            }
-
-        //        }
-        //        return instance;
-        //    }
-
-        //}
+       
 
         public void consulta(String query)
         {

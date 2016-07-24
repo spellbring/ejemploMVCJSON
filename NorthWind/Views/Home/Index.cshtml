@@ -268,36 +268,18 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <a  href="#" class="btn btn-success" id="myButton" onclick="ver()">Get Categories</a>
+        <a  href="javascript:void(0)" class="btn btn-success" id="myButton" onclick="Categorias.prototype.GetDatos('Home/Obtener','jsonResult')">Get Categories</a>
     </div>
-    <div id="jsonResult" class="row">
-
-    </div>
-
-    @section scripts{
-        <script type="text/javascript">
-           function ver() {
-               $("#myButton").on("click", function (e) {
-                   e.preventDefault();
-                   $.ajax({
-
-                       url: "Home/GetCategorias",
-                       type: "GET",
-                       dataType: "json",
-                       success: function (data) {
-                           $(data).each(function (index, item) {
-                               $("#jsonResult").append("<div class='col-md-12'>" + item.CategoryID + " " + item.CategoryName + "</div>");
-                           });
-                       }
-
-                   });
-
-
-               });
-           }
-                
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+            <table id="jsonResult" class="table table-bordered table-hover table-striped">
+           
+            </table>
             
-        </script>
-        
-    }
+            </div>
+            
+    </div>
+
+  
 </div>

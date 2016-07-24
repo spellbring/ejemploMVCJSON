@@ -1,0 +1,151 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Categorias
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i><a href="Home">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-table"></i>Categorias
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="form-group">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <span class="glyphicon glyphicon-plus"></span>Nueva Categor&iacute;a
+            </button>
+        </div>
+
+    </div>
+    <div class="col-md-12">
+        <div class="collapse" id="collapseExample">
+            <div class="well">
+                <h4 class="title">Agregar Nueva Categor&iacute;a</h4>
+                <div class="row">
+                 <form id="form_categories">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="txt_nombre_categoria">Nombre Categor&iacute;a</label>
+                            <input type="text" class="form-control input-sm" id="txt_nombre_categoria" name="txt_nombre_categoria" />
+                        </div>
+                    </div>
+                     <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="txt_nombre_categoria">Descripci&oacute;n Categor&iacute;a</label>
+                            <input type="text" class="form-control input-sm" id="txt_descripcion" name="txt_descripcion" />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="pull-right">
+                            <a  href="javascript:void(0)" class="btn btn-success btn-sm" id="btn_guardar_categoria" onclick="Categorias.prototype.Enviar('form_categories','Categories/Guardar','btn_guardar_categoria')">
+                                <span class="glyphicon glyphicon-floppy-saved"></span>Guardar Categor&iacute;a
+                            </a>
+                        </div>
+                    </div>
+                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                @foreach (var objetos in ViewBag.ListCategorias)
+                {
+
+                    <tr>
+                        <td>@objetos.CategoryID</td>
+                        <td>@objetos.CategoryName</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-search"></span></button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+
+        </div>
+         @section scripts{
+
+       <script >
+
+           function Categorias() {
+
+           }
+           Categorias.prototype.Enviar = function (idForm, url, btn) {
+               $("#" + btn).attr("disabled", "disabled");
+               //var formData = new FormData("#" + idForm[0]);
+               var ai = {
+                    nombre: $("#txt_nombre_categoria").val()
+                   , descripcion: $("#txt_descripcion").val()
+                 
+               };
+               
+               $.ajax({
+                   type: "POST"
+                   , url: url
+                   , data: JSON.stringify(ai)
+                   , cache: false
+                   , contentType: 'application/json; charset=utf-8'
+                   , beforeSend: function () {
+
+                   },
+                   success: function (data) {
+
+                       if (data == "OK") {
+                           $("#" + btn).delay(2000).queue(function (m) {
+                               $("#" + btn).removeAttr("disabled");
+                               m();
+                               console.log(data);
+                               $("#txt_nombre_categoria").val("");
+                               $("#txt_descripcion").val("");
+                               location.reload()
+                               
+                           });
+
+                       }
+                       else {
+
+                           $("#" + btn).delay(2000).queue(function (m) {
+                               $("#" + btn).removeAttr("disabled");
+                               m();
+                               console.log(data);
+                               
+                           });
+
+                       }
+
+
+                   }
+
+
+               })
+
+
+           }
+
+       </script>
+        
+    }
+    </div>
+        
+</div>
+    
+

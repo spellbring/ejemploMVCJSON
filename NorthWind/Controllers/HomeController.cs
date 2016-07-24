@@ -19,21 +19,13 @@ namespace NorthWind.Controllers
         {
             return View();
         }
-
-        public JsonResult GetCategorias()
+        
+        public JsonResult Obtener()
         {
             var cdal = new CategoriasDAL();
-            //var objetos = cdal.GetCategorias();
+            var objetos = cdal.Obtener(0);
 
-            var objetos = new Categorias();
-            var listaObjetos = new List<Categorias>();
-
-            objetos.CategoryID = 1;
-            objetos.CategoryName = "Nombre";
-
-            listaObjetos.Add(objetos);
-
-            return Json(listaObjetos.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(objetos.ToList(), JsonRequestBehavior.AllowGet);
         }
 
     }

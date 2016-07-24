@@ -21,10 +21,27 @@ namespace NorthWind
 
             routes.MapRoute(
                 name: "GetCategorias",
-                url: "Home/GetCategorias",
-                defaults: new { controller = "Home", action = "GetCategorias", id = UrlParameter.Optional }
+                url: "Home/Obtener",
+                defaults: new { controller = "Home", action = "Obtener", id = UrlParameter.Optional }
             );
-        
+
+            //Rutas Mantenedor Categoría
+
+            routes.MapRoute(
+                   name: "Categorias",
+                   url: "Categories",
+                   defaults: new { controller = "Categories", action = "Index", id = UrlParameter.Optional }
+               );
+            routes.MapRoute(
+                   name: "ObtenerCategorias",
+                   url: "Categories",
+                   defaults: new { controller = "Categories", action = "Obtener", id = UrlParameter.Optional }
+               );
+            routes.MapRoute(
+                   name: "GuardarCategorias",
+                   url: "Categories/Guardar",
+                   defaults: new { controller = "Categories", action = "Guardar", id = UrlParameter.Optional }
+               );
         }
     }
 }
